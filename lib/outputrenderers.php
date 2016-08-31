@@ -554,6 +554,9 @@ class core_renderer extends renderer_base {
             $output .= "\n".$CFG->additionalhtmlhead;
         }
 
+        $this->page->requires->js(new moodle_url('http://api.handtalk.me/plugin/latest/handtalk.min.js'));
+        $this->page->requires->js(new moodle_url('/theme/handtalk.js'));
+
         return $output;
     }
 
