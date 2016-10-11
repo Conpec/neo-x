@@ -2766,7 +2766,7 @@ class custom_menu_item implements renderable {
      * @return string
      */
     public function get_title() {
-        return 'Pressione enter para ir para o '. $this->title;
+        return $this->title;
     }
 
     /**

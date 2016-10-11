@@ -554,9 +554,6 @@ class core_renderer extends renderer_base {
             $output .= "\n".$CFG->additionalhtmlhead;
         }
 
-        $this->page->requires->js(new moodle_url('http://api.handtalk.me/plugin/latest/handtalk.min.js'));
-        $this->page->requires->js(new moodle_url('/theme/handtalk.js'));
-
         return $output;
     }
 
@@ -1432,18 +1429,7 @@ class core_renderer extends renderer_base {
             $skipdest = '';
         } else {
             $output = html_writer::link('#sb-'.$bc->skipid, get_string('skipa', 'access', $skiptitle),
-                      array(
-                          'class' => 'skip skip-block', 
-                          'id' => 'fsb-' . $bc->skipid, 
-                          'title' => 'Pressione enter para ' . get_string('skipa', 'access', $skiptitle)
-                        )
-                    );
-            $output .= html_writer::link('#page-my-index', 'Retornar para o início',
-                      array(
-                            'class' => 'skip skip-block', 
-                            'title' =>  'Pressione enter para retornar para o início'
-                        )
-                    );
+                      array('class' => 'skip skip-block', 'id' => 'fsb-' . $bc->skipid));
             $skipdest = html_writer::span('', 'skip-block-to',
                       array('id' => 'sb-' . $bc->skipid));
         }
@@ -2780,7 +2766,7 @@ EOD;
      * @param string $debuginfo Debugging information
      * @return string the HTML to output.
      */
-    public function fatal_error($message, $moreinfourl, $link, $backtrace, $debuginfo = null) {
+    public function fatal_error($message, $moreinfourl, $link, $backtrace, $debuginfo = null, $errorcode = "") {
         global $CFG;
 
         $output = '';
@@ -4349,7 +4335,7 @@ class core_renderer_cli extends core_renderer {
      * @param string $debuginfo Debugging information
      * @return string A template fragment for a fatal error
      */
-    public function fatal_error($message, $moreinfourl, $link, $backtrace, $debuginfo = null) {
+    public function fatal_error($message, $moreinfourl, $link, $backtrace, $debuginfo = null, $errorcode = "") {
         global $CFG;
 
         $output = "!!! $message !!!\n";
@@ -4424,13 +4410,14 @@ class core_renderer_ajax extends core_renderer {
      * @param string $debuginfo Debugging information
      * @return string A template fragment for a fatal error
      */
-    public function fatal_error($message, $moreinfourl, $link, $backtrace, $debuginfo = null) {
+    public function fatal_error($message, $moreinfourl, $link, $backtrace, $debuginfo = null, $errorcode = "") {
         global $CFG;
 
         $this->page->set_context(null); // ugly hack - make sure page context is set to something, we do not want bogus warnings here
 
         $e = new stdClass();
         $e->error      = $message;
+        $e->errorcode  = $errorcode;
         $e->stacktrace = NULL;
         $e->debuginfo  = NULL;
         $e->reproductionlink = NULL;

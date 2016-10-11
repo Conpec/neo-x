@@ -8,8 +8,8 @@ $CFG->dbtype    = 'mariadb';
 $CFG->dblibrary = 'native';
 $CFG->dbhost    = 'localhost';
 $CFG->dbname    = 'moodle';
-$CFG->dbuser    = 'seiji';
-$CFG->dbpass    = 'vpoj4625m';
+$CFG->dbuser    = 'root';
+$CFG->dbpass    = '';
 $CFG->prefix    = 'mdl_';
 $CFG->dboptions = array (
   'dbpersist' => 0,
@@ -17,8 +17,8 @@ $CFG->dboptions = array (
   'dbsocket' => '',
 );
 
-$CFG->wwwroot   = 'http://localhost/freelance/neo-x/moodle';
-$CFG->dataroot  = '/home/seiji/.temp/moodledata';
+$CFG->wwwroot   = 'http://localhost:8080';
+$CFG->dataroot  = '/home/seiji/Documents/freelance/neo-x/moodledata';
 $CFG->admin     = 'admin';
 
 $CFG->directorypermissions = 0777;
